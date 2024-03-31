@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { MainContainer } from "../components/styled/MainContainer";
 import { fetchGenresRequest, getallGenres } from "../features/genre/genreSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Flex, Heading } from "rebass";
 import Search from "../components/Search";
-import { useSearchParams } from "react-router-dom";
 import styled from "@emotion/styled";
 import Genre from "../components/Genre";
 import { useSearchFilter } from "../hooks/useSearchFilter";

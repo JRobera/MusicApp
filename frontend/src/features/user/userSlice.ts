@@ -36,7 +36,7 @@ const userSlice = createSlice({
       state.status = "pending";
       state.error = null;
     },
-    logOutSuccess: (state, action) => {
+    logOutSuccess: (state, _action) => {
       state.status = "succeeded";
       state.error = null;
       state.user = initialState.user;

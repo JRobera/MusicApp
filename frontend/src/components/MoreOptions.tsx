@@ -55,6 +55,7 @@ export default function MoreOptions({
         right: "0",
         zIndex: "10",
         padding: "5px",
+        minWidth: "110px",
         backgroundColor: "var(--secondary)",
       }}
       ref={optionRef}

@@ -6,8 +6,8 @@ type SpinnerType = {
 };
 
 export const Spinner = styled.span`
-  width: ${(props: SpinnerType) => (props.width ? props.width : "20px")};
-  height: ${(props: SpinnerType) => (props.height ? props.height : "20px")};
+  width: ${(props: SpinnerType) => (props.width ? props.width : "10px")};
+  height: ${(props: SpinnerType) => (props.height ? props.height : "10px")};
   border: 2px solid var(--bg-player);
   border-left: 2px solid transparent;
   border-buttom: 2px solid transparent;

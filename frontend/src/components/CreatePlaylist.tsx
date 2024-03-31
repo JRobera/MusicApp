@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import { FormEvent, useRef, useState } from "react";
 import { Flex, Heading } from "rebass";
 import { Button } from "./styled/Button";
@@ -11,44 +10,9 @@ import { Spinner } from "./styled/Spinner";
 import { FormItemsContainer } from "./styled/FormItemsContainer";
 import { Input } from "./styled/Input";
 import { currentUser } from "../features/user/userSlice";
-
-const OverLay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-`;
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  background-color: var(--secondary);
-  padding: 20px 0;
-  border-radius: 4px;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50%;
-  //   max-height: 90vh;
-  @media (max-width: 576px) {
-    width: 80%;
-  }
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 60%;
-  //   max-height: 90vh;
-  @media (max-width: 576px) {
-    width: 80%;
-  }
-`;
+import { OverLay } from "./styled/Overlay";
+import { Container } from "./styled/Container";
+import { Form } from "./styled/Form";
 
 type CreatePlaylistProps = {
   handleToggle: () => void;

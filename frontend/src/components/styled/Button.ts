@@ -13,6 +13,7 @@ export const Button = styled.button`
   background-color: ${(props: ButtonProps) =>
     props.bgColor ? props.bgColor : "var(--primary)"};
   width: ${(props: ButtonProps) => (props.width ? props.width : "")};
+  font-size: 1rem;
   border: none;
   border-radius: 5px;
   display: flex;
@@ -22,7 +23,7 @@ export const Button = styled.button`
   margin: ${(props: ButtonProps) =>
     props?.margin ? props?.margin : "5px 5px 10px"};
   padding: ${(props: ButtonProps) =>
-    props?.padding ? props?.padding : "10px 5px"};
+    props?.padding ? props?.padding : "10px 10px"};
   @media (max-width: 576px) {
     font-size: 0.9rem;
   }

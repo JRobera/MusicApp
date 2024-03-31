@@ -3,7 +3,6 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   currentUser,
-  currentUserStatus,
   setUserFailure,
   setUserRequest,
 } from "../features/user/userSlice";
@@ -12,7 +11,6 @@ import Loading from "./Loading";
 export default function AuthenticationGuard() {
   const dispatch = useDispatch();
   const user = useSelector(currentUser);
-  const userStatus = useSelector(currentUserStatus);
 
   useEffect(() => {
     async function Auth() {

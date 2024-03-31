@@ -10,35 +10,9 @@ import { FormEvent, useState } from "react";
 import AddSongDetail from "./add_song_form/AddSongDetail";
 import AddSong from "./add_song_form/AddSong";
 import AddSongCoverImage from "./add_song_form/AddSongCoverImage";
+import { Container } from "./styled/Container";
+import { Form } from "./styled/Form";
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  background-color: var(--secondary);
-  padding: 20px;
-  border-radius: 4px;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50%;
-  //   max-height: 90vh;
-  @media (max-width: 576px) {
-    width: 80%;
-  }
-`;
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 60%;
-  //   max-height: 90vh;
-  @media (max-width: 576px) {
-    width: 80%;
-  }
-`;
 const StepCounter = styled.div`
   position: absolute;
   top: 1rem;

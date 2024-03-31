@@ -24,7 +24,7 @@ const songsInPlaylistSlice = createSlice({
   name: "songsInPlaylist",
   initialState,
   reducers: {
-    addSongToPlaylistRequest: (state, action) => {
+    addSongToPlaylistRequest: (state, _action) => {
       state.status = "pending";
       state.error = null;
     },
@@ -36,7 +36,7 @@ const songsInPlaylistSlice = createSlice({
       state.status = "failed";
       state.error = action.payload.message;
     },
-    fetchSongsInPlaylistRequest: (state, action) => {
+    fetchSongsInPlaylistRequest: (state, _action) => {
       state.status = "pending";
       state.error = null;
     },

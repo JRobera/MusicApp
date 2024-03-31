@@ -19,7 +19,7 @@ const songInAlbumSlice = createSlice({
   name: "songsInAlbum",
   initialState,
   reducers: {
-    fetchSongsInAlbumRequest: (state, action) => {
+    fetchSongsInAlbumRequest: (state, _action) => {
       state.status = "pending";
       state.error = null;
     },

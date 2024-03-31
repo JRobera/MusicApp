@@ -8,6 +8,7 @@ import { IoAddCircleOutline, IoRemoveCircleOutline } from "react-icons/io5";
 const SongToBeAddedWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: 2px;
   padding: 5px;
   width: 100%;
   height: 60px;

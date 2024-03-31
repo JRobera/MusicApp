@@ -1,20 +1,11 @@
-import styled from "@emotion/styled";
 import { useEffect, useRef } from "react";
 import { song } from "../tyepes";
 import DeleteConfirmation from "./DeleteConfirmation";
 import EditForm from "./EditForm";
 import { useDispatch, useSelector } from "react-redux";
 import { getSongStatus, resetStatus } from "../features/songs/songSlice";
+import { OverLay } from "./styled/Overlay";
 
-const OverLay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 5;
-`;
 type action = "Edit" | "Delete" | "";
 
 type ActionModalProps = {

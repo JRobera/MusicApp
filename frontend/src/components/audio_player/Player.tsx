@@ -2,7 +2,7 @@ import AudioPlayer, { RHAP_UI } from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import MusicInfo from "./MusicInfo";
 import { playlist } from "../../tyepes";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,7 +31,7 @@ export default function Player() {
   const dispatch = useDispatch();
   const playlist: playlist = useSelector(getAllPlaylistItems);
   const allSongs: playlist = useSelector(selectAllSongs);
-  const [autoPlay, setAutoPlay] = useState(false);
+  // const [autoPlay, setAutoPlay] = useState(false);
   const currentTrackIdx = useSelector(currentTrackIndex);
 
   let currentPlaylist = playlist;
@@ -48,15 +48,12 @@ export default function Player() {
 
   const handleClickPrev = () => {
     dispatch(decreaseCurrentTrackIndex());
-    setAutoPlay(true);
   };
   const handleClickNext = () => {
     dispatch(increaseCurrentTrackIndex());
-    setAutoPlay(true);
   };
   const handleOnEnded = () => {
     dispatch(onTrackEnd());
-    setAutoPlay(true);
   };
 
   //#endregion

@@ -18,7 +18,7 @@ const songsInGenreSlice = createSlice({
   name: "songsInGenre",
   initialState,
   reducers: {
-    fetchSongsInGenreRequest: (state, action) => {
+    fetchSongsInGenreRequest: (state, _action) => {
       state.status = "pending";
       state.error = null;
     },

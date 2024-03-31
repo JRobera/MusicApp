@@ -12,8 +12,8 @@ import { CiLogout } from "react-icons/ci";
 import styled from "@emotion/styled";
 import { Button } from "./styled/Button";
 import Avatar from "./Avatar";
-import { useDispatch, useSelector } from "react-redux";
-import { currentUser, logOutRequest } from "../features/user/userSlice";
+import { useSelector } from "react-redux";
+import { currentUser } from "../features/user/userSlice";
 
 const Container = styled.div`
   display: flex;
@@ -54,7 +54,6 @@ const linkList: SideBarLinks[] = [
 ];
 
 export default function SideBar() {
-  const dispatch = useDispatch();
   const currUser = useSelector(currentUser);
   const handleLogOut = () => {
     window.open(import.meta.env.VITE_LOGOUT_REDIRECT_URL, "_self");

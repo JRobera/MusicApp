@@ -18,7 +18,7 @@ const songSlice = createSlice({
   initialState: initialState,
   reducers: {
     // C
-    addSongRequest: (state, action) => {
+    addSongRequest: (state, _action) => {
       state.status = "pending";
       state.error = null;
     },
@@ -45,7 +45,7 @@ const songSlice = createSlice({
       state.error = action.payload.message;
     },
     // U
-    updateSongRequest: (state, action) => {
+    updateSongRequest: (state, _action) => {
       state.status = "pending";
       state.error = null;
     },
@@ -58,7 +58,7 @@ const songSlice = createSlice({
       state.error = action.payload.message;
     },
     // D
-    deleteSongRequest: (state, action) => {
+    deleteSongRequest: (state, _action) => {
       state.status = "pending";
       state.error = null;
     },

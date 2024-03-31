@@ -34,6 +34,8 @@ export default function PlaylistSong() {
           backgroundColor: "var(--secondary)",
           marginBottom: "5px",
           justifyContent: "space-between",
+          padding: "2px",
+          borderRadius: "5px",
         }}
       >
         <Heading fontSize="3" fontFamily="sans-serif" marginY={2}>

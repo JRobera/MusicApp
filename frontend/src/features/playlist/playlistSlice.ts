@@ -23,7 +23,7 @@ const playlistSlice = createSlice({
   name: "userplaylists",
   initialState,
   reducers: {
-    createPlaylistRequest: (state, action) => {
+    createPlaylistRequest: (state, _action) => {
       state.status = "pending";
       state.error = null;
     },
@@ -36,7 +36,7 @@ const playlistSlice = createSlice({
       state.status = "failed";
       state.error = action.payload.message;
     },
-    fetchPlaylistRequest: (state, action) => {
+    fetchPlaylistRequest: (state, _action) => {
       state.status = "pending";
       state.error = null;
     },
@@ -49,7 +49,7 @@ const playlistSlice = createSlice({
       state.status = "failed";
       state.error = action.payload.message;
     },
-    deletePlaylistRequest: (state, action) => {
+    deletePlaylistRequest: (state, _action) => {
       state.status = "pending";
       state.error = null;
     },

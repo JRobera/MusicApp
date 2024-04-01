@@ -33,36 +33,42 @@ And it is responsive so user can use it in small size devices.
    npm install
 4. Set up environment variables:
 
-- Create a `.env` file in the `frontend` directory.
+     Create a `.env` file in the `frontend` directory.
 - Add VITE_BASE_URL eg. http://localhost:3000
 - Add VITE_LOGIN_URL eg. http://localhost:3000/auth/google
 - Add VITE_LOGOUT_REDIRECT_URL eg. http://localhost:3000/auth/logout
 
-- Create a `.env` file in the `backend` directory.
+     Create a `.env` file in the `backend` directory.
 - Add server PORT
 - Add DB connection string
 - Add Cloudinary credentials like CLOUD_NAME, API_KEY, API_SECRET
-- Add google client id and google secret GOOGLE_CLIENT_ID ,GOOGLE_SECRET
+- Add google client id and google secret GOOGLE_CLIENT_ID, GOOGLE_SECRET
 - Add CLIENT_URL_ROOT eg. http://localhost:5173
 - Add CLIENT_URL_HOME eg. http://localhost:5173/home
 - Add COOKIE_KEY
   
 
 5. Start the development server:
-   cd backend
-   npm run dev
-6. Start the client:
-   cd frontend
-   npm run dev
+   ```
+     cd backend
+     npm run dev
+   ```
+7. Start the client:
+  ```
+    cd frontend
+    npm run dev
+  ```
 7. Access the website at `http://localhost:5173` in your browser.
 
 # Docker
-## Pull the Docker Image from Docker hub
+### Pull the Docker Image from Docker hub
+```
   docker push robera1/musicapi:v1
-  
+```
 ### To create and start the container
+```
   docker-compose up
-  
+```  
 ## Usage
 
 - Log in using your credentials.

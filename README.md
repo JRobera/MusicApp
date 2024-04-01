@@ -26,12 +26,16 @@ And it is responsive so user can use it in small size devices.
 1. Clone the repository:
    git clone https://github.com/JRobera/MusicApp.git
 2. Install dependencies for the server:
-   cd backend
-   npm install
-3. Install dependencies for the client:
-   cd frontend
-   npm install
-4. Set up environment variables:
+   ```
+      cd backend
+      npm install
+   ```
+4. Install dependencies for the client:
+   ```
+      cd frontend
+      npm install
+   ```
+6. Set up environment variables:
 
      Create a `.env` file in the `frontend` directory.
 - Add VITE_BASE_URL eg. http://localhost:3000

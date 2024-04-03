@@ -7,7 +7,10 @@ import { IoMdMore } from "react-icons/io";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllSongs } from "../features/songs/songSlice";
-import { setCurrentPlaylist } from "../features/currentPlaylist/currentPlaylistSlice";
+import {
+  setCurrentPlaylist,
+  setIsPlaying,
+} from "../features/currentPlaylist/currentPlaylistSlice";
 import { getAllSongsInAlbum } from "../features/albums/songInAlbumSlice";
 import { getArtistSongs } from "../features/artists/artistSongSlice";
 import formateTime from "../util/formatTime";
@@ -72,6 +75,7 @@ export default function SongItem({ song }: SongItemProps) {
         setCurrentPlaylist({ data: songsInPlaylist, trackId: song._id })
       );
     }
+    dispatch(setIsPlaying(true));
   };
   // toggle options menu
   const handleToggleOptions = () => {

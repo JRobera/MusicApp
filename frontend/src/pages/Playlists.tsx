@@ -22,7 +22,7 @@ const PlaylistContainer = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   overflow: auto;
-  max-height: 330px !important;
+  // max-height: 330px !important;
 `;
 
 type Props = {};

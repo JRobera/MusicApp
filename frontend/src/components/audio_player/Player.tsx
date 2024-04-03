@@ -2,7 +2,7 @@ import AudioPlayer, { RHAP_UI } from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import MusicInfo from "./MusicInfo";
 import { playlist } from "../../tyepes";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,8 +14,10 @@ import {
   currentTrackIndex,
   decreaseCurrentTrackIndex,
   getAllPlaylistItems,
+  getIsPlaying,
   increaseCurrentTrackIndex,
   onTrackEnd,
+  setIsPlaying,
 } from "../../features/currentPlaylist/currentPlaylistSlice";
 
 const PlayerContainer = styled.div`
@@ -30,15 +32,14 @@ const PlayerContainer = styled.div`
 export default function Player() {
   const dispatch = useDispatch();
   const playlist: playlist = useSelector(getAllPlaylistItems);
+  const isPlaying = useSelector(getIsPlaying);
   const allSongs: playlist = useSelector(selectAllSongs);
-  const [autoPlay, setAutoPlay] = useState(false);
   const currentTrackIdx = useSelector(currentTrackIndex);
 
   let currentPlaylist = playlist;
 
   useEffect(() => {
     dispatch(fetchSongRequest());
-    setAutoPlay(true);
   }, [dispatch]);
 
   if (playlist.length === 0) {
@@ -49,15 +50,15 @@ export default function Player() {
 
   const handleClickPrev = () => {
     dispatch(decreaseCurrentTrackIndex());
-    setAutoPlay(true);
+    dispatch(setIsPlaying(true));
   };
   const handleClickNext = () => {
     dispatch(increaseCurrentTrackIndex());
-    setAutoPlay(true);
+    dispatch(setIsPlaying(true));
   };
   const handleOnEnded = () => {
     dispatch(onTrackEnd());
-    setAutoPlay(true);
+    dispatch(setIsPlaying(true));
   };
 
   //#endregion
@@ -69,13 +70,14 @@ export default function Player() {
           backgroundColor: "var(--bg-player)",
         }}
         volume={0.2}
-        autoPlayAfterSrcChange={autoPlay}
+        autoPlayAfterSrcChange={isPlaying}
         header={<MusicInfo song={currentPlaylist[currentTrackIdx]} />}
         showSkipControls
         src={currentPlaylist[currentTrackIdx]?.song.songUrl}
         onClickPrevious={handleClickPrev}
         onClickNext={handleClickNext}
         onEnded={handleOnEnded}
+        onPause={() => dispatch(setIsPlaying(false))}
         customProgressBarSection={[
           RHAP_UI.PROGRESS_BAR,
           RHAP_UI.CURRENT_TIME,

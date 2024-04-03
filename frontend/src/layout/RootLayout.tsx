@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import { Outlet, useOutletContext } from "react-router-dom";
 import SideBar from "../components/SideBar";
 import { Flex } from "rebass";
@@ -6,6 +7,13 @@ import AddNewSong from "../components/AddNewSong";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSongStatus, resetStatus } from "../features/songs/songSlice";
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+`;
 
 type ContextType = { handleToggle: () => void };
 
@@ -27,14 +35,14 @@ export default function RootLayout() {
   }, [songStatus]);
 
   return (
-    <Flex flexDirection={"column"} css={{ height: "100vh" }}>
+    <Wrapper>
       <Flex flex={1} css={{ overflowY: "auto" }}>
         <SideBar />
         <Outlet context={{ handleToggle }} />
       </Flex>
       <Player />
       {isOpen && <AddNewSong handleToggle={handleToggle} />}
-    </Flex>
+    </Wrapper>
   );
 }
 export function useIsOpen() {

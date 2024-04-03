@@ -16,6 +16,7 @@ body,
   margin: 0;
   padding: 0;
   height: 100vh;
+  min-height: 100dvh;
 }
 a {
   text-decoration: none;
@@ -36,8 +37,6 @@ a {
 .Toastify__toast {
   color: white;
   background-color: var(--primary) !important;
-}
-.Toastify__progress-bar {
 }
 
 @media (prefers-color-scheme: light) {

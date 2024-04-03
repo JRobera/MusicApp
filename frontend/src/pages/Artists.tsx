@@ -16,7 +16,7 @@ const ArtistsContainer = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   overflow: auto;
-  max-height: 330px !important;
+  height: 100%;
 `;
 
 type Props = {};

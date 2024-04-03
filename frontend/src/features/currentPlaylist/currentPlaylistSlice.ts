@@ -7,6 +7,7 @@ type currentPlaylist = {
   error: string | null;
   playlist: playlist;
   currentTrackIndex: number;
+  isPlaying: boolean;
 };
 
 const initialState: currentPlaylist = {
@@ -14,6 +15,7 @@ const initialState: currentPlaylist = {
   error: null,
   playlist: JSON.parse(localStorage.getItem("currentPlaylist") || "[]"),
   currentTrackIndex: Number(localStorage.getItem("currentTrackIndex")) || 0,
+  isPlaying: false,
 };
 
 const currentPlaylistSlice = createSlice({
@@ -81,6 +83,9 @@ const currentPlaylistSlice = createSlice({
       state.status = "failed";
       state.error = action.payload;
     },
+    setIsPlaying: (state, action) => {
+      state.isPlaying = action.payload;
+    },
   },
 });
 
@@ -88,6 +93,8 @@ export const getAllPlaylistItems = (state: RootState) =>
   state.currentPlaylist.playlist;
 export const currentTrackIndex = (state: RootState) =>
   state.currentPlaylist.currentTrackIndex;
+export const getIsPlaying = (state: RootState) =>
+  state.currentPlaylist.isPlaying;
 
 export const {
   setCurrentPlaylist,
@@ -97,6 +104,7 @@ export const {
   fetchCurrentPlaylistRequest,
   fetchCurrentPlaylistSuccess,
   fetchCurrentPlaylistFailure,
+  setIsPlaying,
 } = currentPlaylistSlice.actions;
 
 export default currentPlaylistSlice.reducer;

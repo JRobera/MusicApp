@@ -35,9 +35,7 @@ export default function Songs({}: SongsProps) {
       <Heading fontSize="3" fontFamily="sans-serif">
         Songs
       </Heading>
-      <Box
-        css={{ overflowY: "scroll", minHeight: "336px", maxHeight: "342px" }}
-      >
+      <Box css={{ overflowY: "auto" }}>
         {currentPlaylist.map((song: song, idx) => (
           <SongItem song={song} key={idx} />
         ))}

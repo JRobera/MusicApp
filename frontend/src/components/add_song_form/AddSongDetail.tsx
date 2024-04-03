@@ -50,6 +50,7 @@ export default function AddSongDetail({
     <FormWrapper title="Add Song  Details">
       <FormItemsContainer>
         <Input
+          autoComplete="off"
           name="title"
           type="text"
           placeholder="Enter song title"
@@ -61,6 +62,7 @@ export default function AddSongDetail({
       </FormItemsContainer>
       <FormItemsContainer>
         <Input
+          autoComplete="off"
           name="artist"
           type="text"
           placeholder="Enter artist name"
@@ -71,6 +73,7 @@ export default function AddSongDetail({
       </FormItemsContainer>
       <FormItemsContainer>
         <Input
+          autoComplete="off"
           name="album"
           type="text"
           placeholder="Enter album name"

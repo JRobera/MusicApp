@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Flex } from "rebass";
 import { LinkItem } from "./styled/LinkItem";
 import { CiHome } from "react-icons/ci";
@@ -12,8 +12,8 @@ import { CiLogout } from "react-icons/ci";
 import styled from "@emotion/styled";
 import { Button } from "./styled/Button";
 import Avatar from "./Avatar";
-import { useSelector } from "react-redux";
-import { currentUser } from "../features/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { currentUser, logOutRequest } from "../features/user/userSlice";
 
 const Container = styled.div`
   display: flex;
@@ -54,9 +54,13 @@ const linkList: SideBarLinks[] = [
 ];
 
 export default function SideBar() {
+  const dispatch = useDispatch();
   const currUser = useSelector(currentUser);
+  const navigate = useNavigate();
+
   const handleLogOut = () => {
-    window.open(import.meta.env.VITE_LOGOUT_REDIRECT_URL, "_self");
+    dispatch(logOutRequest());
+    navigate("/", { replace: true });
   };
 
   return (

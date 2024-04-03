@@ -24,6 +24,7 @@ export const Button = styled.button`
     props?.margin ? props?.margin : "5px 5px 10px"};
   padding: ${(props: ButtonProps) =>
     props?.padding ? props?.padding : "10px 10px"};
+  cursor: pointer;
   @media (max-width: 576px) {
     font-size: 0.9rem;
   }

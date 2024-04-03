@@ -29,7 +29,7 @@ const songSlice = createSlice({
     },
     addSongFailure: (state, action) => {
       state.status = "failed";
-      state.error = action.payload.message;
+      state.error = action.payload.response.data.message;
     },
     // R
     fetchSongRequest: (state) => {
@@ -42,7 +42,7 @@ const songSlice = createSlice({
     },
     fetchSongFailure: (state, action) => {
       state.status = "failed";
-      state.error = action.payload.message;
+      state.error = action.payload.response.data.message;
     },
     // U
     updateSongRequest: (state, _action) => {
@@ -55,7 +55,7 @@ const songSlice = createSlice({
     },
     updateSongFailure: (state, action) => {
       state.status = "failed";
-      state.error = action.payload.message;
+      state.error = action.payload.response.data.message;
     },
     // D
     deleteSongRequest: (state, _action) => {
@@ -68,10 +68,11 @@ const songSlice = createSlice({
     },
     deleteSongFailure: (state, action) => {
       state.status = "failed";
-      state.error = action.payload.message;
+      state.error = action.payload.response.data.message;
     },
     resetStatus: (state) => {
       state.status = "idle";
+      state.error = null;
     },
   },
 });

@@ -1,9 +1,14 @@
 import styled from "@emotion/styled";
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { Flex } from "rebass";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addSongRequest, getSongStatus } from "../features/songs/songSlice";
+import {
+  addSongRequest,
+  getSongStatus,
+  getSongerror,
+  resetStatus,
+} from "../features/songs/songSlice";
 import { useMultistepForm } from "../hooks/useMultistepForm";
 import AddSongDetail from "./add_song_form/AddSongDetail";
 import AddSong from "./add_song_form/AddSong";
@@ -13,6 +18,7 @@ import { Spinner } from "./styled/Spinner";
 import { OverLay } from "./styled/Overlay";
 import { Container } from "./styled/Container";
 import { Form } from "./styled/Form";
+import { generateError } from "../util/toast";
 
 const StepCounter = styled.div`
   position: absolute;
@@ -44,6 +50,7 @@ const initialState: FormDataType = {
 export default function AddNewSong({ handleToggle }: AddNewSongProps) {
   const dispatch = useDispatch();
   const songStatus = useSelector(getSongStatus);
+  const songError = useSelector(getSongerror);
   const overLayRef = useRef(null);
   const [data, setData] = useState(initialState);
   function updateFields(fields: Partial<FormDataType>) {
@@ -65,6 +72,12 @@ export default function AddNewSong({ handleToggle }: AddNewSongProps) {
     <AddSongCoverImage {...data} updateFields={updateFields} />,
   ]);
 
+  useEffect(() => {
+    if (songError !== null) {
+      generateError(songError);
+      dispatch(resetStatus());
+    }
+  }, [songError]);
   const handleOverLayClick = (event: React.MouseEvent) => {
     if (event.target === overLayRef.current) {
       handleToggle();

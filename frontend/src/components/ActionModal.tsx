@@ -3,8 +3,13 @@ import { song } from "../tyepes";
 import DeleteConfirmation from "./DeleteConfirmation";
 import EditForm from "./EditForm";
 import { useDispatch, useSelector } from "react-redux";
-import { getSongStatus, resetStatus } from "../features/songs/songSlice";
+import {
+  getSongStatus,
+  getSongerror,
+  resetStatus,
+} from "../features/songs/songSlice";
 import { OverLay } from "./styled/Overlay";
+import { generateError } from "../util/toast";
 
 type action = "Edit" | "Delete" | "";
 
@@ -21,12 +26,21 @@ export default function ActionModal({
 }: ActionModalProps) {
   const dispatch = useDispatch();
   const songStatus = useSelector(getSongStatus);
+  const songError = useSelector(getSongerror);
+
   const overLayRef = useRef(null);
   const handleOverLayClick = (event: React.MouseEvent) => {
     if (event.target === overLayRef.current) {
       handleOverLayToggle();
     }
   };
+  useEffect(() => {
+    if (songError !== null) {
+      generateError(songError);
+      dispatch(resetStatus());
+    }
+  }, [songError]);
+
   useEffect(() => {
     if (songStatus === "succeeded") {
       handleOverLayToggle();

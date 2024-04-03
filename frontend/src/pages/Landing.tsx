@@ -1,6 +1,17 @@
-import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
-import { Box, Flex, Heading, Image, Text } from "rebass";
+import { Flex, Heading, Text } from "rebass";
+import { useMultistepForm } from "../hooks/useMultistepForm";
+import SignUp from "../components/SignUp";
+import Login from "../components/Login";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  currentUser,
+  currentUserStatus,
+  setUserRequest,
+} from "../features/user/userSlice";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { generatenotification } from "../util/toast";
 
 const PageWrapper = styled.div`
   display: flex;
@@ -14,41 +25,53 @@ const PageWrapper = styled.div`
   height: 100vh;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 0 20px;
   flex-wrap: wrap;
+  gap: 60px;
   @media (max-width: 620px) {
     flex-direction: column;
+    gap: 15px;
   }
 `;
 const ContentBox = styled.div`
   flex: 1;
   text-align: center;
   @media (max-width: 620px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-`;
-const LinkWrapper = styled.div`
-  color: black !important;
-  background-color: white !important;
-  border-radius: 6px;
-  &:hover {
-    box-shadow: 0 0 15px var(--bg-player);
+    flex: none;
+    width: 100%;
   }
 `;
 
-const LinkStyle = {
-  backgroundColor: "var(--primary)",
-  display: "flex",
-  borderRadius: "5px",
-  padding: "10px",
-  gap: "10px",
-  justifyContent: "center",
-  alignItems: "center",
-};
+const LinkStyle = styled.p`
+  font-size: 14px;
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;
 
 export default function Landing() {
+  const dispatch = useDispatch();
+  const user = useSelector(currentUser);
+  const userstatus = useSelector(currentUserStatus);
+  const navigate = useNavigate();
+  const { step, isFirst, nextStep, previousStep } = useMultistepForm([
+    <SignUp />,
+    <Login />,
+  ]);
+
+  useEffect(() => {
+    dispatch(setUserRequest());
+  }, []);
+  useEffect(() => {
+    if (userstatus === "idle") {
+      if (user) {
+        navigate("/home", { replace: true });
+        generatenotification("You are already logged in");
+      }
+    }
+  }, [user]);
+
   return (
     <PageWrapper>
       <ContentBox>
@@ -61,32 +84,24 @@ export default function Landing() {
           musical journey today!
         </Text>
       </ContentBox>
-      <Box css={{ flex: "1" }}>
+      <ContentBox>
         <Flex
           css={{
             flexDirection: "column",
             gap: "10px",
             alignItems: "center",
             justifyContent: "center",
+            backgroundColor: "var(--secondary)",
+            padding: "15px 0 0",
+            borderRadius: "4px",
           }}
         >
-          <Text fontSize={"20px"}>Sign in</Text>
-          <LinkWrapper>
-            <Link to={import.meta.env.VITE_LOGIN_URL} style={LinkStyle}>
-              <Image
-                src="https://res.cloudinary.com/dbv6hao81/image/upload/v1711718428/player/public/GoogleLogo_p0rwoh.png"
-                alt="Google Sign In"
-                css={{
-                  width: "25px",
-                  height: "25px",
-                  borderRadius: "50%",
-                }}
-              />
-              Sign in With Google
-            </Link>
-          </LinkWrapper>
+          {step}
+          <LinkStyle onClick={() => (!isFirst ? nextStep() : previousStep())}>
+            {!isFirst ? "Already have An account?" : "Don't have an Account?"}
+          </LinkStyle>
         </Flex>
-      </Box>
+      </ContentBox>
     </PageWrapper>
   );
 }

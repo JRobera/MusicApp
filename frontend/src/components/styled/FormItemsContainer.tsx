@@ -5,6 +5,7 @@ type LabelProps = {
   padding?: string;
   cursor?: string;
   maxWidth?: string;
+  width?: string;
   height?: string;
   justifyContent?: string;
 };
@@ -12,9 +13,10 @@ type LabelProps = {
 export const FormItemsContainer = styled.label`
   position: relative;
   display: flex;
-  // width: 100%;
+  width: ${(props: LabelProps) => (props.width ? props.width : "")};
   display: flex;
   align-items: center;
+  overflow-wrap: anywhere;
   max-width: ${(props: LabelProps) => (props.maxWidth ? props.maxWidth : "")};
   height: ${(props: LabelProps) => (props.height ? props.height : "")};
   border: ${(props: LabelProps) => (props.border ? props.border : "")};

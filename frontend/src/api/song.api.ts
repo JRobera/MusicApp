@@ -15,7 +15,7 @@ const addNewSong = async (newSong: FormDataType) => {
     const response = await api.post("/api/addsong", newSong);
     return response.data;
   } catch (error) {
-    throw new Error("Error while adding song!");
+    throw error;
   }
 };
 
@@ -25,7 +25,7 @@ const fetchSongs = async () => {
     const response = await api.get("/api/getallsongs");
     return response.data;
   } catch (error) {
-    throw new Error("Error while fetching songs.");
+    throw error;
   }
 };
 
@@ -35,7 +35,7 @@ const updateSong = async (updatedSong: FormDataType) => {
     const response = await api.patch("/api/updatesong", updatedSong);
     return response.data;
   } catch (error) {
-    throw new Error("");
+    throw error;
   }
 };
 
@@ -45,7 +45,7 @@ const deleteSong = async (id: string) => {
     const response = await api.put(`/api/deletesong/${id}`);
     return response.data;
   } catch (error) {
-    throw new Error("");
+    throw error;
   }
 };
 

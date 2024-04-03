@@ -24,7 +24,7 @@ const uploadToCloudinary = async (path, folder) => {
       };
     })
     .catch((error) => {
-      throw new Error(error);
+      throw error;
     });
 };
 
@@ -36,7 +36,6 @@ const removeFromCloudinary = async (public_id, type) => {
       if (error) {
         console.log(error);
       }
-      // console.log(result);
     }
   );
 };

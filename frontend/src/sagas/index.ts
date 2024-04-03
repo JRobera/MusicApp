@@ -19,9 +19,13 @@ import { watchFetchSongsInPlaylist } from "./playlistSaga/songsInPlaylistSaga";
 import { watchCreatePlaylist } from "./playlistSaga/createPlaylistSaga";
 import { watchAddToPlaylist } from "./playlistSaga/addToPlaylistSaga";
 import { watchDeletePlaylist } from "./playlistSaga/deletePlaylistSaga";
+import { watchLoginRequest } from "./userSaga/userLogInSaga";
+import { watchSignUpRequest } from "./userSaga/userSignUpSaga";
 
 function* rootSaga() {
   yield all([
+    watchSignUpRequest(),
+    watchLoginRequest(),
     watchSetUserRequest(),
     watchLogOutRequest(),
     watchFetchSongs(),

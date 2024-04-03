@@ -33,6 +33,12 @@ a {
   background: #fff;
   border-radius: 3px;
 }
+.Toastify__toast {
+  color: white;
+  background-color: var(--primary) !important;
+}
+.Toastify__progress-bar {
+}
 
 @media (prefers-color-scheme: light) {
   * {
@@ -46,6 +52,11 @@ a {
     --secondary: #f0f0f0;
     --bg-player: #d2e1e8;
     --text-color: #333333;
+  }
+
+  .Toastify__toast {
+    color: #000;
+    background-color: var(--primary) !important;
   }
   /* a:hover {
     color: #747bff;

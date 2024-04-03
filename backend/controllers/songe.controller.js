@@ -27,7 +27,9 @@ const addSong = async (req, res) => {
           "player/coverImages"
         );
       } catch (error) {
-        return res.status(400).json({ message: "Failed to upload " });
+        return res.status(500).json({
+          message: "Failed to upload! Check your internet connection ",
+        });
       }
       let song = {
         title,
@@ -53,7 +55,7 @@ const addSong = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res
-      .status(400)
+      .status(500)
       .json({ message: "An error occured while creating the song" });
   }
 };
@@ -333,7 +335,9 @@ const updateSong = async (req, res) => {
           "player/coverImages"
         );
       } catch (error) {
-        return res.status(400).json({ message: "Failed to upload " });
+        return res.status(500).json({
+          message: "Failed to upload! Check your internet connection ",
+        });
       }
       const result = await Song.findOneAndUpdate(
         { _id: songId },
@@ -385,7 +389,7 @@ const removeSong = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res
-      .status(400)
+      .status(500)
       .json({ message: "Error while trying to delete song" });
   }
 };

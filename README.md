@@ -24,8 +24,10 @@ And it is responsive so user can use it in small size devices.
 ## Installation
 
 1. Clone the repository:
-   git clone https://github.com/JRobera/MusicApp.git
-2. Install dependencies for the server:
+   ```
+      git clone https://github.com/JRobera/MusicApp.git
+   ```
+3. Install dependencies for the server:
    ```
       cd backend
       npm install

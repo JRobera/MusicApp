@@ -38,7 +38,7 @@ const handleSignUp = async (req, res) => {
           httpOnly: true,
           secure: true,
           sameSite: "none",
-          maxAge: 24 * 60 * 60 * 1000,
+          maxAge: 24 * 60 * 60 * 3,
         });
         res.status(201).json({ data: accessToken });
       });
@@ -67,7 +67,7 @@ const handleSingIn = async (req, res) => {
         expiresIn: "15m",
       });
       const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
-        expiresIn: "7d",
+        expiresIn: "3d",
       });
       const userUpdate = await User.updateOne({ email }, { refreshToken });
       res.cookie("jwt", refreshToken, {
@@ -75,7 +75,7 @@ const handleSingIn = async (req, res) => {
         httpOnly: true,
         secure: true,
         sameSite: "none",
-        maxAge: 24 * 60 * 60 * 1000,
+        maxAge: 24 * 60 * 60 * 3,
       });
       return res.status(200).json({ data: accessToken });
     } else {

@@ -37,7 +37,7 @@ export default function Login() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isLoading },
   } = useForm<FormDataType>({ resolver: zodResolver(schema) });
   const submit = (data: FormDataType) => {
     dispatch(logInRequest(data));
@@ -76,7 +76,7 @@ export default function Login() {
         </FormItemsContainer>
         <Button width="90%">
           Login
-          {userStatus === "pending" && <Spinner />}
+          {isLoading && <Spinner />}
         </Button>
       </Form>
     </FormWrapper>

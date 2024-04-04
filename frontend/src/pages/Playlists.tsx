@@ -16,6 +16,7 @@ import { currentUser } from "../features/user/userSlice";
 import Playlist from "../components/Playlist";
 import CreatePlaylist from "../components/CreatePlaylist";
 import { useSearchFilter } from "../hooks/useSearchFilter";
+import { PlaylistSkeleton } from "../components/styled/skeleton/playlist/playlistSkele";
 
 const PlaylistContainer = styled.div`
   display: flex;
@@ -77,9 +78,13 @@ export default function Playlists({}: Props) {
         Playlist
       </Heading>
       <PlaylistContainer>
-        {playlists.map((playlistItem) => (
-          <Playlist key={playlistItem._id} list={playlistItem} />
-        ))}
+        {usersplaylistsStatus === "pending" ? (
+          <PlaylistSkeleton />
+        ) : (
+          playlists.map((playlistItem) => (
+            <Playlist key={playlistItem._id} list={playlistItem} />
+          ))
+        )}
       </PlaylistContainer>
       {isOpen && <CreatePlaylist handleToggle={handleToggle} />}
     </MainContainer>

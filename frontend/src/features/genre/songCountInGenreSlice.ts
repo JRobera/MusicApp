@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
 
 type songCountInGenreType = { genreCount: number; genre: string };
 
@@ -32,6 +33,11 @@ const songCountInGenreSlice = createSlice({
     },
   },
 });
+
+export const getSongCountInGenre = (state: RootState) =>
+  state.songCountInGenre.data;
+export const getSongCountInGenreStatus = (state: RootState) =>
+  state.songCountInGenre.status;
 
 export const {
   fetchSongCountInGenreRequest,

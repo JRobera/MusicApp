@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  height: 100dvh;
+  height: 100svh;
 `;
 
 type ContextType = { handleToggle: () => void };

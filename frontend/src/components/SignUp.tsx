@@ -53,7 +53,7 @@ export default function SignUp() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isLoading },
   } = useForm<FormDataType>({ resolver: zodResolver(schema) });
   const submit = (data: FormDataType) => {
     dispatch(signUpRequest(data));
@@ -115,7 +115,7 @@ export default function SignUp() {
         </FormItemsContainer>
         <Button width="90%">
           Sign up
-          {userStatus === "pending" && <Spinner />}
+          {isLoading && <Spinner />}
         </Button>
       </Form>
     </FormWrapper>

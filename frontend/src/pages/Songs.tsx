@@ -5,15 +5,17 @@ import Search from "../components/Search";
 import SongItem from "../components/SongItem";
 import { playlist, song } from "../tyepes";
 import { useSelector } from "react-redux";
-import { selectAllSongs } from "../features/songs/songSlice";
+import { getSongStatus, selectAllSongs } from "../features/songs/songSlice";
 import { useIsOpen } from "../layout/RootLayout";
 import { useSearchFilter } from "../hooks/useSearchFilter";
+import { SongItemSkeleton } from "../components/styled/skeleton/song/songSkele";
 
 type SongsProps = {};
 
 export default function Songs({}: SongsProps) {
   const { handleToggle } = useIsOpen();
   const allSongs: playlist = useSelector(selectAllSongs);
+  const songStatus = useSelector(getSongStatus);
   const { currentList: currentPlaylist } = useSearchFilter(allSongs, "song");
 
   return (
@@ -36,9 +38,13 @@ export default function Songs({}: SongsProps) {
         Songs
       </Heading>
       <Box css={{ overflowY: "auto" }}>
-        {currentPlaylist.map((song: song, idx) => (
-          <SongItem song={song} key={idx} />
-        ))}
+        {songStatus === "pending" ? (
+          <SongItemSkeleton />
+        ) : (
+          currentPlaylist.map((song: song, idx) => (
+            <SongItem song={song} key={idx} />
+          ))
+        )}
       </Box>
     </MainContainer>
   );

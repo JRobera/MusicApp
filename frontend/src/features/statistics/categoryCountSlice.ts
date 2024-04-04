@@ -39,6 +39,8 @@ const categoryCountSlice = createSlice({
 });
 
 export const getAllCatCount = (state: RootState) => state.catCount.data;
+export const getCatStatus = (state: RootState) => state.catCount.status;
+export const getCatError = (state: RootState) => state.catCount.error;
 
 export const {
   fetchCatCountRequest,

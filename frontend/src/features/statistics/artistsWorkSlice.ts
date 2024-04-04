@@ -38,6 +38,8 @@ const artistsWorkSlice = createSlice({
 });
 
 export const getAllArtistsWork = (state: RootState) => state.artistsWork.data;
+export const getArtistsWorkStatus = (state: RootState) =>
+  state.artistsWork.status;
 
 export const {
   fetchArtistsWorkRequest,

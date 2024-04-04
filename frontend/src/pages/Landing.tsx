@@ -23,7 +23,7 @@ const PageWrapper = styled.div`
   background-size: cover;
   background-position: center;
   height: 100vh;
-  height: 100dvh;
+  height: 100svh;
   align-items: center;
   justify-content: center;
   padding: 0 20px;
@@ -57,8 +57,8 @@ export default function Landing() {
   const userstatus = useSelector(currentUserStatus);
   const navigate = useNavigate();
   const { step, isFirst, nextStep, previousStep } = useMultistepForm([
-    <SignUp />,
     <Login />,
+    <SignUp />,
   ]);
 
   useEffect(() => {
@@ -99,7 +99,7 @@ export default function Landing() {
         >
           {step}
           <LinkStyle onClick={() => (!isFirst ? nextStep() : previousStep())}>
-            {!isFirst ? "Already have An account?" : "Don't have an Account?"}
+            {isFirst ? "Already have An account?" : "Don't have an Account?"}
           </LinkStyle>
         </Flex>
       </ContentBox>

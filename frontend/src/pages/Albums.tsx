@@ -4,9 +4,14 @@ import Album from "../components/Album";
 import Search from "../components/Search";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAlbumRequest, getAllAlbums } from "../features/albums/albumSlice";
+import {
+  fetchAlbumRequest,
+  getAlbumsStatus,
+  getAllAlbums,
+} from "../features/albums/albumSlice";
 import styled from "@emotion/styled";
 import { useSearchFilter } from "../hooks/useSearchFilter";
+import { AlbumSkeleton } from "../components/styled/skeleton/album/albumSkele";
 
 const AlbumsContainer = styled.div`
   display: flex;
@@ -19,6 +24,7 @@ const AlbumsContainer = styled.div`
 export default function Albums() {
   const dispatch = useDispatch();
   const allAlbumItems = useSelector(getAllAlbums);
+  const albumItemsStatus = useSelector(getAlbumsStatus);
   const { currentList: albumList } = useSearchFilter(allAlbumItems, "album");
 
   useEffect(() => {
@@ -42,9 +48,13 @@ export default function Albums() {
         Albums
       </Heading>
       <AlbumsContainer>
-        {albumList.map((album) => (
-          <Album key={album.albumTitle} data={album} />
-        ))}
+        {albumItemsStatus === "pending" ? (
+          <AlbumSkeleton />
+        ) : (
+          albumList.map((album) => (
+            <Album key={album.albumTitle} data={album} />
+          ))
+        )}
       </AlbumsContainer>
     </MainContainer>
   );

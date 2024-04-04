@@ -35,6 +35,7 @@ const genreSlice = createSlice({
 });
 
 export const getallGenres = (state: RootState) => state.genres.genres;
+export const getGenresStatus = (state: RootState) => state.genres.status;
 
 export const { fetchGenresRequest, fetchGenresSuccess, fetchGenresFailure } =
   genreSlice.actions;

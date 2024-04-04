@@ -7,16 +7,18 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchArtistRequest,
   getAllArtists,
+  getArtistsStatus,
 } from "../features/artists/artistsSlice";
 import styled from "@emotion/styled";
 import { useSearchFilter } from "../hooks/useSearchFilter";
+import { ArtistSkeleton } from "../components/styled/skeleton/artist/artistSkele";
 
 const ArtistsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   overflow: auto;
-  height: 100%;
+  // height: 100%;
 `;
 
 type Props = {};
@@ -24,6 +26,7 @@ type Props = {};
 export default function Artists({}: Props) {
   const dispatch = useDispatch();
   const allArtistsList = useSelector(getAllArtists);
+  const artistsListStatus = useSelector(getArtistsStatus);
   const { currentList: artistList } = useSearchFilter(allArtistsList, "artist");
 
   useEffect(() => {
@@ -47,9 +50,13 @@ export default function Artists({}: Props) {
         Artists
       </Heading>
       <ArtistsContainer>
-        {artistList.map((artist) => (
-          <Artist key={artist.artist} artist={artist} />
-        ))}
+        {artistsListStatus === "pending" ? (
+          <ArtistSkeleton />
+        ) : (
+          artistList.map((artist) => (
+            <Artist key={artist.artist} artist={artist} />
+          ))
+        )}
       </ArtistsContainer>
     </MainContainer>
   );

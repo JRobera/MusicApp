@@ -37,6 +37,7 @@ const artistsSlice = createSlice({
 });
 
 export const getAllArtists = (state: RootState) => state.artists.artists;
+export const getArtistsStatus = (state: RootState) => state.artists.status;
 
 export const {
   fetchArtistRequest,

@@ -23,7 +23,7 @@ const PageWrapper = styled.div`
   background-size: cover;
   background-position: center;
   height: 100vh;
-  height: 100svh;
+  height: 100dvh;
   align-items: center;
   justify-content: center;
   padding: 0 20px;

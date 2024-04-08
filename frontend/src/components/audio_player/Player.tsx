@@ -17,6 +17,7 @@ import {
   getIsPlaying,
   increaseCurrentTrackIndex,
   onTrackEnd,
+  setCurrentTrackId,
   setIsPlaying,
 } from "../../features/currentPlaylist/currentPlaylistSlice";
 
@@ -45,6 +46,9 @@ export default function Player() {
   if (playlist.length === 0) {
     currentPlaylist = allSongs;
   }
+  useEffect(() => {
+    dispatch(setCurrentTrackId(currentPlaylist[currentTrackIdx]?._id));
+  }, [currentTrackIdx]);
 
   //#region
 
@@ -71,7 +75,11 @@ export default function Player() {
         }}
         volume={0.2}
         autoPlayAfterSrcChange={isPlaying}
-        header={<MusicInfo song={currentPlaylist[currentTrackIdx]} />}
+        header={
+          currentPlaylist[currentTrackIdx] && (
+            <MusicInfo song={currentPlaylist[currentTrackIdx]} />
+          )
+        }
         showSkipControls
         src={currentPlaylist[currentTrackIdx]?.song.songUrl}
         onClickPrevious={handleClickPrev}

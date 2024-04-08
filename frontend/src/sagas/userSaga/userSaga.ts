@@ -15,8 +15,9 @@ function* setUserSaga(): Generator {
   try {
     const response = yield isUserAuthenticated();
     yield put(setUserSuccess(response));
-    yield put(resetStatus());
   } catch (error) {
     yield put(setUserFailure(error));
+  } finally {
+    yield put(resetStatus());
   }
 }

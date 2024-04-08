@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   currentUser,
@@ -16,6 +16,7 @@ export default function AuthenticationGuard() {
   const user = useSelector(currentUser);
   const userStatus = useSelector(currentUserStatus);
   const accessToken = useSelector(getaccessToken);
+  const location = useLocation();
 
   api.interceptors.request.use(
     (config) => {
@@ -30,6 +31,20 @@ export default function AuthenticationGuard() {
     }
   );
 
+  api.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+      const prevRequest = error?.config;
+      if (error?.response?.status === 403 && !prevRequest?.send) {
+        prevRequest.send = true;
+        const newAccessToken = dispatch(setUserRequest());
+        prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+        return api(prevRequest);
+      }
+      return Promise.reject(error);
+    }
+  );
+
   useEffect(() => {
     async function Auth() {
       try {
@@ -39,12 +54,15 @@ export default function AuthenticationGuard() {
       }
     }
     Auth();
-  }, [dispatch]);
+  }, [dispatch, accessToken]);
 
-  // If the user is authenticated, show them the dashboard. Otherwise, redirect to login page.
   if (userStatus === "pending" || user === null) {
     return <Loading />;
   }
 
-  return user ? <Outlet /> : <Navigate to={"/"} replace />;
+  return user ? (
+    <Outlet />
+  ) : (
+    <Navigate to={"/"} state={{ from: location }} replace />
+  );
 }

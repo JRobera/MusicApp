@@ -43,7 +43,14 @@ export default function CreatePlaylist({ handleToggle }: CreatePlaylistProps) {
     <OverLay ref={overLayRef} onClick={handleOverLayClick}>
       <Container>
         <Heading fontFamily={"sans-serif"}>Create Playlist</Heading>
-        <Form onSubmit={handleSubmit}>
+        <Form
+          onSubmit={handleSubmit}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleSubmit(event);
+            }
+          }}
+        >
           <FormItemsContainer>
             <Input
               type="text"

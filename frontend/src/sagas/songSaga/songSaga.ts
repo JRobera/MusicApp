@@ -14,8 +14,9 @@ function* fetchSongsSaga(): Generator {
   try {
     const response = yield fetchSongs();
     yield put(fetchSongSuccess(response));
-    yield put(resetStatus());
   } catch (error) {
     yield put(fetchSongFailure(error));
+  } finally {
+    yield put(resetStatus());
   }
 }

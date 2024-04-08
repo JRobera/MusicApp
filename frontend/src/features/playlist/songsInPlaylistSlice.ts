@@ -24,6 +24,17 @@ const songsInPlaylistSlice = createSlice({
   name: "songsInPlaylist",
   initialState,
   reducers: {
+    reOrderPlaylistRequest: (state, action) => {
+      state.playlist.songs = [...action.payload.newList];
+    },
+    reOrderPlaylistSuccess: (state, _action) => {
+      state.status = "succeeded";
+      state.error = null;
+    },
+    reOrderPlaylistFailure: (state, action) => {
+      state.status = "failed";
+      state.error = action.payload.response.data.message;
+    },
     addSongToPlaylistRequest: (state, _action) => {
       state.status = "pending";
       state.error = null;
@@ -58,6 +69,9 @@ export const getAllSongsInPlaylist = (state: RootState) =>
   state.songsInPlaylist.playlist.songs;
 
 export const {
+  reOrderPlaylistRequest,
+  reOrderPlaylistSuccess,
+  reOrderPlaylistFailure,
   addSongToPlaylistRequest,
   addSongToPlaylistSuccess,
   addSongToPlaylistFailure,

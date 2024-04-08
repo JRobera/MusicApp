@@ -14,7 +14,7 @@ import {
   logInRequest,
 } from "../features/user/userSlice";
 import { Spinner } from "./styled/Spinner";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { generateError } from "../util/toast";
 import { resetStatus } from "../features/user/userSlice";
@@ -28,6 +28,8 @@ export default function Login() {
   const dispatch = useDispatch();
   const userStatus = useSelector(currentUserStatus);
   const userError = useSelector(currentUserError);
+  const location = useLocation();
+  const from = location.state?.from.pathname;
 
   const navigate = useNavigate();
   const schema: ZodType<FormDataType> = z.object({
@@ -37,14 +39,14 @@ export default function Login() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isLoading },
+    formState: { errors },
   } = useForm<FormDataType>({ resolver: zodResolver(schema) });
   const submit = (data: FormDataType) => {
     dispatch(logInRequest(data));
   };
   useEffect(() => {
     if (userStatus === "succeeded") {
-      navigate("/home", { replace: true });
+      navigate(from || "/home", { replace: true });
     }
   }, [userStatus]);
   useEffect(() => {
@@ -76,7 +78,7 @@ export default function Login() {
         </FormItemsContainer>
         <Button width="90%">
           Login
-          {isLoading && <Spinner />}
+          {userStatus === "pending" && <Spinner />}
         </Button>
       </Form>
     </FormWrapper>

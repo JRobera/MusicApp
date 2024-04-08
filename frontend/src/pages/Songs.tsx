@@ -9,6 +9,7 @@ import { getSongStatus, selectAllSongs } from "../features/songs/songSlice";
 import { useIsOpen } from "../layout/RootLayout";
 import { useSearchFilter } from "../hooks/useSearchFilter";
 import { SongItemSkeleton } from "../components/styled/skeleton/song/songSkele";
+import { useEffect, useState } from "react";
 
 type SongsProps = {};
 
@@ -17,6 +18,10 @@ export default function Songs({}: SongsProps) {
   const allSongs: playlist = useSelector(selectAllSongs);
   const songStatus = useSelector(getSongStatus);
   const { currentList: currentPlaylist } = useSearchFilter(allSongs, "song");
+  const [pageloaded, setPageLoaded] = useState(false);
+  useEffect(() => {
+    setPageLoaded(true);
+  }, []);
 
   return (
     <MainContainer>
@@ -38,7 +43,7 @@ export default function Songs({}: SongsProps) {
         Songs
       </Heading>
       <Box css={{ overflowY: "auto" }}>
-        {songStatus === "pending" ? (
+        {songStatus === "pending" && !pageloaded ? (
           <SongItemSkeleton />
         ) : (
           currentPlaylist.map((song: song, idx) => (

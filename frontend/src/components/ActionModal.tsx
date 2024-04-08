@@ -52,10 +52,12 @@ export default function ActionModal({
       {actionType === "Edit" ? (
         <EditForm song={song} />
       ) : (
-        <DeleteConfirmation
-          song={song}
-          handleOverLayToggle={handleOverLayToggle}
-        />
+        actionType === "Delete" && (
+          <DeleteConfirmation
+            song={song}
+            handleOverLayToggle={handleOverLayToggle}
+          />
+        )
       )}
     </OverLay>
   );

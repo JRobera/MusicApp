@@ -18,12 +18,12 @@ export default function AddSongCoverImage({
     if (!event.target.files || event.target.files.length === 0) return;
     updateFields({ coverImage: event.target.files[0] });
   }
-  function handleCoverImageDrop(event: React.DragEvent<HTMLInputElement>) {
-    event.preventDefault();
-    if (!event.dataTransfer.files || event.dataTransfer.files.length === 0)
-      return;
-    updateFields({ coverImage: event.dataTransfer.files[0] });
-  }
+  // function handleCoverImageDrop(event: React.DragEvent<HTMLInputElement>) {
+  //   event.preventDefault();
+  //   if (!event.dataTransfer.files || event.dataTransfer.files.length === 0)
+  //     return;
+  //   updateFields({ coverImage: event.dataTransfer.files[0] });
+  // }
   return (
     <FormWrapper title="Add song cover image">
       <FormItemsContainer
@@ -36,8 +36,8 @@ export default function AddSongCoverImage({
       >
         {coverImage ? coverImage.name : "Upload Image"}
         <Input
-          onDragOver={(event) => event.preventDefault()}
-          onDrop={handleCoverImageDrop}
+          // onDragOver={(event) => event.preventDefault()}
+          // onDrop={handleCoverImageDrop}
           autoFocus
           id="imageupload"
           type="file"
@@ -45,7 +45,7 @@ export default function AddSongCoverImage({
           width="0"
           opacity={0}
           padding="1px"
-          required
+          required={!coverImage}
           onChange={handleCoverImageChange}
           name="coverImage"
         />

@@ -16,12 +16,12 @@ export default function AddSong({ newSong, updateFields }: SongProps) {
     if (!event.target.files || event.target.files.length === 0) return;
     updateFields({ newSong: event.target.files[0] });
   }
-  function handleSongDrop(event: React.DragEvent<HTMLInputElement>): void {
-    event.preventDefault();
-    if (!event.dataTransfer.files || event.dataTransfer.files.length === 0)
-      return;
-    updateFields({ newSong: event.dataTransfer.files[0] });
-  }
+  // function handleSongDrop(event: React.DragEvent<HTMLInputElement>): void {
+  //   event.preventDefault();
+  //   if (!event.dataTransfer.files || event.dataTransfer.files.length === 0)
+  //     return;
+  //   updateFields({ newSong: event.dataTransfer.files[0] });
+  // }
   return (
     <FormWrapper title="Add song file">
       <FormItemsContainer
@@ -34,8 +34,8 @@ export default function AddSong({ newSong, updateFields }: SongProps) {
       >
         {newSong ? newSong.name : "Upload Song"}
         <Input
-          onDragOver={(event) => event.preventDefault()}
-          onDrop={handleSongDrop}
+          // onDragOver={(event) => event.preventDefault()}
+          // onDrop={handleSongDrop}
           autoFocus
           id="songupload"
           type="file"
@@ -43,7 +43,7 @@ export default function AddSong({ newSong, updateFields }: SongProps) {
           width="0"
           opacity={0}
           padding="1px"
-          required
+          required={!newSong}
           onChange={handleSongChange}
           name="newSong"
         />

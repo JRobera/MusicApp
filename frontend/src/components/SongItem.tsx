@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllSongs } from "../features/songs/songSlice";
 import {
+  getcurrentTrackId,
   setCurrentPlaylist,
   setIsPlaying,
 } from "../features/currentPlaylist/currentPlaylistSlice";
@@ -20,6 +21,8 @@ import MoreOptions from "./MoreOptions";
 import ActionModal from "./ActionModal";
 import { getAllSongsInPlaylist } from "../features/playlist/songsInPlaylistSlice";
 
+type SContainerProps = { bg_c?: string };
+
 const SongContainer = styled.div`
   display: flex;
   border-radius: 5px;
@@ -27,7 +30,7 @@ const SongContainer = styled.div`
   margin-bottom: 3px;
   box-shadow: var(--secondary) 0px 0px 4px;
   cursor: pointer;
-
+  background-color: ${(props: SContainerProps) => props.bg_c && props.bg_c};
   &:hover {
     background-color: var(--secondary);
   }
@@ -48,6 +51,7 @@ export default function SongItem({ song }: SongItemProps) {
   const songsInAlbum = useSelector(getAllSongsInAlbum);
   const artistSongs = useSelector(getArtistSongs);
   const songsInGenre = useSelector(getAllSongsInGenre);
+  const currentTrackId = useSelector(getcurrentTrackId);
   const songsInPlaylist = useSelector(getAllSongsInPlaylist);
   const timeRef = useRef<HTMLAudioElement>(null);
   const [duration, setDuration] = useState<number | null>(null);
@@ -92,8 +96,8 @@ export default function SongItem({ song }: SongItemProps) {
   const actionModalProps = { actionType, song, handleOverLayToggle };
 
   return (
-    <SongContainer>
-      <Flex css={{ flex: "1" }} onClick={handleClickPlay}>
+    <SongContainer bg_c={currentTrackId === song._id ? "var(--bg-player)" : ""}>
+      <Flex css={{ flex: "1", marginLeft: "5px" }} onClick={handleClickPlay}>
         <MusicInfo song={song} />
       </Flex>
       <Flex alignItems={"center"} css={{ gap: "15px" }}>
@@ -104,7 +108,12 @@ export default function SongItem({ song }: SongItemProps) {
           ref={timeRef}
         />
         <span>{formateTime(Number(duration))}</span>
-        <Button onClick={handleToggleOptions} name="More" position="relative">
+        <Button
+          onClick={handleToggleOptions}
+          name="More"
+          position="relative"
+          padding="2px"
+        >
           <IoMdMore size={20} />
           {isOpen && <MoreOptions {...optionsProps} />}
         </Button>

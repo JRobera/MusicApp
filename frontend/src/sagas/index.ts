@@ -21,6 +21,7 @@ import { watchAddToPlaylist } from "./playlistSaga/addToPlaylistSaga";
 import { watchDeletePlaylist } from "./playlistSaga/deletePlaylistSaga";
 import { watchLoginRequest } from "./userSaga/userLogInSaga";
 import { watchSignUpRequest } from "./userSaga/userSignUpSaga";
+import { watchUpdatePlaylistOreder } from "./playlistSaga/updatePlaylistOrderSaga";
 
 function* rootSaga() {
   yield all([
@@ -46,6 +47,7 @@ function* rootSaga() {
     watchFetchSongsInPlaylist(),
     watchAddToPlaylist(),
     watchDeletePlaylist(),
+    watchUpdatePlaylistOreder(),
   ]);
 }
 

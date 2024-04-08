@@ -8,6 +8,10 @@ type AddPlaylistParams = {
   songId: string;
   playlistId: string;
 };
+type UpdatePlaylistParams = {
+  newPlaylistOrder: string[];
+  playlistId: string;
+};
 type DeletePlaylistParams = {
   userId: string;
   playlistId: string;
@@ -56,6 +60,21 @@ const addOrRemoveSongToPlaylist = async ({
   }
 };
 
+const updatePlaylistOrder = async ({
+  newPlaylistOrder,
+  playlistId,
+}: UpdatePlaylistParams) => {
+  try {
+    const response = await api.patch("/api/update-playlist-order", {
+      newPlaylistOrder,
+      playlistId,
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const deletePlaylist = async ({ userId, playlistId }: DeletePlaylistParams) => {
   try {
     const response = await api.delete(
@@ -72,5 +91,6 @@ export {
   fetchPlaylists,
   fetchPlaylist,
   addOrRemoveSongToPlaylist,
+  updatePlaylistOrder,
   deletePlaylist,
 };

@@ -7,6 +7,7 @@ type currentPlaylist = {
   error: string | null;
   playlist: playlist;
   currentTrackIndex: number;
+  currentTrackId: string;
   isPlaying: boolean;
 };
 
@@ -15,6 +16,7 @@ const initialState: currentPlaylist = {
   error: null,
   playlist: JSON.parse(localStorage.getItem("currentPlaylist") || "[]"),
   currentTrackIndex: Number(localStorage.getItem("currentTrackIndex")) || 0,
+  currentTrackId: localStorage.getItem("currentTrackId") || "",
   isPlaying: false,
 };
 
@@ -28,12 +30,24 @@ const currentPlaylistSlice = createSlice({
         "currentPlaylist",
         JSON.stringify(action.payload.data)
       );
-      state.currentTrackIndex = action.payload.data.findIndex(
-        (song: song) => song._id === action.payload.trackId
-      );
+      state.currentTrackIndex = action.payload.data.findIndex((song: song) => {
+        let trackID = action.payload.trackId || state.currentTrackId;
+        if (song._id === trackID) {
+          return song._id;
+        }
+      });
       localStorage.setItem(
         "currentTrackIndex",
         String(state.currentTrackIndex)
+      );
+      localStorage.setItem(
+        "currentTrackId",
+        String(
+          action.payload.trackId ? action.payload.trackId : state.currentTrackId
+        )
+      );
+      state.currentTrackId = String(
+        action.payload.trackId ? action.payload.trackId : state.currentTrackId
       );
       state.status = "succeeded";
       state.error = null;
@@ -83,6 +97,10 @@ const currentPlaylistSlice = createSlice({
       state.status = "failed";
       state.error = action.payload;
     },
+    setCurrentTrackId: (state, action) => {
+      localStorage.setItem("currentTrackId", String(action.payload));
+      state.currentTrackId = String(action.payload);
+    },
     setIsPlaying: (state, action) => {
       state.isPlaying = action.payload;
     },
@@ -93,6 +111,8 @@ export const getAllPlaylistItems = (state: RootState) =>
   state.currentPlaylist.playlist;
 export const currentTrackIndex = (state: RootState) =>
   state.currentPlaylist.currentTrackIndex;
+export const getcurrentTrackId = (state: RootState) =>
+  state.currentPlaylist.currentTrackId;
 export const getIsPlaying = (state: RootState) =>
   state.currentPlaylist.isPlaying;
 
@@ -105,6 +125,7 @@ export const {
   fetchCurrentPlaylistSuccess,
   fetchCurrentPlaylistFailure,
   setIsPlaying,
+  setCurrentTrackId,
 } = currentPlaylistSlice.actions;
 
 export default currentPlaylistSlice.reducer;

@@ -85,6 +85,23 @@ const addOrRemoveSongToPlaylist = async (req, res) => {
   }
 };
 
+const updatedPlaylistOrder = async (req, res) => {
+  const { newPlaylistOrder, playlistId } = req.body;
+  try {
+    const newPlaylist = await Playlist.updateOne(
+      { _id: playlistId },
+      { songs: newPlaylistOrder }
+    );
+    if (!newPlaylist.modifiedCount)
+      return res.status(400).json({ message: "Failed to update playlist." });
+    return res.sendStatus(200);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Error while updating playlist oreder" });
+  }
+};
+
 const deletePlaylist = async (req, res) => {
   const { userId, playlistId } = req.query;
   try {
@@ -110,5 +127,6 @@ export {
   fetchPlaylists,
   fetchPlaylist,
   addOrRemoveSongToPlaylist,
+  updatedPlaylistOrder,
   deletePlaylist,
 };

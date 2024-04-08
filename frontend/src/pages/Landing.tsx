@@ -3,15 +3,6 @@ import { Flex, Heading, Text } from "rebass";
 import { useMultistepForm } from "../hooks/useMultistepForm";
 import SignUp from "../components/SignUp";
 import Login from "../components/Login";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  currentUser,
-  currentUserStatus,
-  setUserRequest,
-} from "../features/user/userSlice";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { generatenotification } from "../util/toast";
 
 const PageWrapper = styled.div`
   display: flex;
@@ -23,7 +14,7 @@ const PageWrapper = styled.div`
   background-size: cover;
   background-position: center;
   height: 100vh;
-  height: 100svh;
+  height: 100dvh;
   align-items: center;
   justify-content: center;
   padding: 0 20px;
@@ -52,26 +43,10 @@ const LinkStyle = styled.p`
 `;
 
 export default function Landing() {
-  const dispatch = useDispatch();
-  const user = useSelector(currentUser);
-  const userstatus = useSelector(currentUserStatus);
-  const navigate = useNavigate();
   const { step, isFirst, nextStep, previousStep } = useMultistepForm([
     <Login />,
     <SignUp />,
   ]);
-
-  useEffect(() => {
-    dispatch(setUserRequest());
-  }, []);
-  useEffect(() => {
-    if (userstatus === "idle") {
-      if (user) {
-        navigate("/home", { replace: true });
-        generatenotification("You are already logged in");
-      }
-    }
-  }, [user]);
 
   return (
     <PageWrapper>

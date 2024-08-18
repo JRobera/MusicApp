@@ -75,7 +75,7 @@ const handleSingIn = async (req, res) => {
         httpOnly: true,
         secure: true,
         sameSite: "none",
-        maxAge: 24 * 60 * 60 * 3,
+        maxAge: 24 * 60 * 60 * 3 * 1000,
       });
       return res.status(200).json({ data: accessToken });
     } else {

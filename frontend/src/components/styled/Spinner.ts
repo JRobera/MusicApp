@@ -8,7 +8,7 @@ type SpinnerType = {
 export const Spinner = styled.span`
   width: ${(props: SpinnerType) => (props.width ? props.width : "10px")};
   height: ${(props: SpinnerType) => (props.height ? props.height : "10px")};
-  border: 2px solid var(--bg-player);
+  border: 2px solid var(--spinner-color);
   border-left: 2px solid transparent;
   border-buttom: 2px solid transparent;
   border-radius: 50%;
@@ -16,25 +16,25 @@ export const Spinner = styled.span`
   @keyframes spin {
     0% {
       transform: rotate(0deg);
-      border: 2px solid var(--bg-player);
+      border: 2px solid var(--spinner-color);
       border-left: 0.2rem solid transparent;
       border-buttom: 0.2rem solid transparent;
     }
     50% {
       transform: rotate(90deg);
-      border: 2px solid var(--bg-player);
+      border: 2px solid var(--spinner-color);
       border-left: 0.2rem solid transparent;
       border-top: 0.2rem solid transparent;
     }
     75% {
       transform: rotate(180deg);
-      border: 2px solid var(--bg-player);
+      border: 2px solid var(--spinner-color);
       border-right: 0.2rem solid transparent;
       border-top: 0.2rem solid transparent;
     }
     100% {
       transform: rotate(1turn);
-      border: 2px solid var(--bg-player);
+      border: 2px solid var(--spinner-color);
       border-right: 0.2rem solid transparent;
       border-bottom: 0.2rem solid transparent;
     }

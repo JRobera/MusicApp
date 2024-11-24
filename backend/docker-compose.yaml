@@ -2,8 +2,8 @@ version: "3.8"
 services:
   backend:
     build: .
-    image: robera1/musicapi:v1
-    container_name: backend
+    image: robera1/musicapi:v2
+    container_name: backendv2
     ports:
       - "3005:3005"
     env_file:

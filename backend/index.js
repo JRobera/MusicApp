@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import cors from "cors";
+import helmet from "helmet";
 
 // Routes
 import authRouter from "./routes/auth.route.js";
@@ -26,6 +27,7 @@ app.use(
   })
 );
 
+app.use(helmet());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

@@ -6,6 +6,7 @@
   --secondary: #19272e;
   --bg-player: #084868;
   --text-color: #111f26;
+  --spinner-color: #ffffff;
 }
 * {
   color: #fff !important;

@@ -51,10 +51,14 @@ export default function Landing() {
   return (
     <PageWrapper>
       <ContentBox>
-        <Heading fontSize={"30px"} fontFamily={"sans-serif"}>
+        <Heading
+          fontSize={"30px"}
+          fontFamily={"sans-serif"}
+          css={{ color: "#fff !important" }}
+        >
           MUSIC
         </Heading>
-        <Text>
+        <Text css={{ color: "#fff !important" }}>
           Immerse yourself in the world of music with our sleek and intuitive
           web app. Discover, and create playlists effortlessly. Start your
           musical journey today!
